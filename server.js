@@ -1,14 +1,37 @@
-const http = require('http'); 
+const express = require('express');
+const path = require('path');
 
-const HOSTNAME = '127.0.0.1'; 
-const PORT = 3000;           
+const app = express();
+const PORT = 3000;
 
-const server = http.createServer((req, res) => { 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.end('Hello World! Velkomin í Vefforritun 2.');
+// 1. Stillingar fyrir Views (EJS)
+// Við segjum Express að leita að views í 'src/views' möppunni
+app.set('views', path.join(__dirname, 'src', 'views'));
+app.set('view engine', 'ejs');
+
+// 2. Statískar skrár (CSS, myndir)
+// Allt sem er í 'public' möppunni verður aðgengilegt á vefnum (t.d. /css/styles.css)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// 3. Slóðir (Routes)
+// Forsíða
+app.get('/', (req, res) => {
+  // Renderar views/index.ejs og sendir titil sem breytu
+  res.render('index', { title: 'Forsíða' });
 });
 
-server.listen(PORT, HOSTNAME, () => {
-  console.log(`Server keyrir á http://${HOSTNAME}:${PORT}/`);
+// Um okkur síða
+app.get('/about', (req, res) => {
+  res.render('about', { title: 'Um okkur' });
+});
+
+// 4. Villumeðhöndlun (404)
+// Ef engin ofangreind slóð passfar, grípum við það hér
+app.use((req, res) => {
+  res.status(404).send('Síða fannst ekki (404)');
+});
+
+// 5. Ræsa þjóninn
+app.listen(PORT, () => {
+  console.log(`Server keyrir á http://localhost:${PORT}`);
 });
