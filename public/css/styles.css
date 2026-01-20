@@ -1,19 +1,7 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 2rem;
-    background-color: #f4f4f4;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
 }
 
-header {
-    background: #333;
-    color: white;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-
-header a {
-    color: #fff;
-    margin-right: 15px;
-    text-decoration: none;
-}
+/*# sourceMappingURL=styles.css.map */

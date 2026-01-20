@@ -1,0 +1,9 @@
+@use 'variables' as *;
+@use 'base/reset';
+@use 'components/movie-card';
+
+body {
+    background-color: $primary-color;
+    color: $text-light;
+    font-family: sans-serif;
+}
