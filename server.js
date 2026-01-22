@@ -11,8 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Fall til að lesa gögnin
 const getMovies = () => {
-  const data = fs.readFileSync
-  (path.join(__dirname, 'src/data/movies.json'));
+  const data = fs.readFileSync(path.join(__dirname, 'src/data/movies.json'));
   return JSON.parse(data);
 };
 
@@ -29,7 +28,8 @@ app.get('/movie/:id', (req, res) => {
     return res.status(404).render('404', { title: 'Síða fannst ekki' });
   }
 
-  res.render('movie-details', { title: movie.title, movie });
+  res.render('movie-details', 
+    { title: movie.title, movie });
 });
 
 app.listen(PORT, () => {
