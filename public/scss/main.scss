@@ -7,3 +7,10 @@ body {
     color: $text-light;
     font-family: sans-serif;
 }
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); // Galdra-lína fyrir responsive kort
+  gap: 2rem;
+  padding: 2rem 0;
+}

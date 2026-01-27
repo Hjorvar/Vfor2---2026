@@ -1,0 +1,27 @@
+// 1. Box Sizing reglan - MIKILVÆGAST!
+// Þetta tryggir að padding og border stækki ekki boxin okkar óvænt.
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// 2. Grunnstillingar á Body
+body {
+  line-height: 1.5; // Betri læsileiki
+  -webkit-font-smoothing: antialiased; // Mýkri texti á Mac/iOS
+}
+
+// 3. Myndir haga sér vel
+// Þetta kemur í veg fyrir að myndir "sprengi" síðuna ef þær eru stórar
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+// 4. Eyðum sjálfgefnu útliti á inntaksreitum (valfrjálst en gott)
+input, button, textarea, select {
+  font: inherit;
+}

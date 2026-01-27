@@ -19,5 +19,12 @@
     "year": 1988,
     "description": "Besta hasarmynd sögurnar, allir yfir 16 ára verða að sjá",
     "image": "/images/predator.jpg"
+  },
+      {
+    "id": "terminator",
+    "title": "Terminator",
+    "year": 1984,
+    "description": "Góð hasarmynd, allir yfir 16 ára verða að sjá",
+    "image": "/images/terminator.jpg"
   }
 ]
