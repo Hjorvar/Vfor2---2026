@@ -1,37 +1,35 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
+
+// Sækjum routerinn okkar
+const moviesRouter = require('./src/routes/movies.routes');
 
 const app = express();
 const PORT = 3000;
 
+// 1. Stillingar (View Engine)
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
+
+// 2. Middleware (Static files)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fall til að lesa gögnin
-const getMovies = () => {
-  const data = fs.readFileSync(path.join(__dirname, 'src/data/movies.json'));
-  return JSON.parse(data);
-};
+// 3. Routes (Tengjum routerinn við rótina)
+app.use('/', moviesRouter);
 
-app.get('/', (req, res) => {
-  const movies = getMovies();
-  res.render('index', { title: 'Bíóvefurinn', movies });
+// 4. Villumeðhöndlun (404 Middleware)
+// Ef enginn route hér að ofan grípur beiðnina, endar hún hér.
+app.use((req, res, next) => {
+    res.status(404).render('404', { title: 'Síða fannst ekki' });
 });
 
-app.get('/movie/:id', (req, res) => {
-  const movies = getMovies();
-  const movie = movies.find(m => m.id === req.params.id);
-
-  if (!movie) {
-    return res.status(404).render('404', { title: 'Síða fannst ekki' });
-  }
-
-  res.render('movie-details', 
-    { title: movie.title, movie });
+// 5. Villumeðhöndlun (500 Middleware)
+// Grípur system villur (server crashes)
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Eitthvað fór úrskeiðis!');
 });
 
 app.listen(PORT, () => {
-  console.log(`Server keyrir á http://localhost:${PORT}`);
+    console.log(`Server keyrir á http://localhost:${PORT}`);
 });
