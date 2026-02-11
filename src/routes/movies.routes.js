@@ -1,12 +1,13 @@
 const express = require('express');
-const router = express.Router(); // Búum til Router hlut
+const router = express.Router();
 
-// Sækjum controllerinn
+// Passaðu að slóðin sé rétt (tvípunktur til að fara upp úr routes, svo inn í controllers)
 const moviesController = require('../controllers/movies.controller');
 
-// Skilgreinum slóðirnar
-// Athugið: Hér notum við '/' en ekki '/movies' vegna þess að við tengjum þetta í server.js
+// Lína 10 er líklega hér:
+// Ef moviesController.index er undefined, þá kemur villan sem þú fékkst.
 router.get('/', moviesController.index);
-router.get('/movie/:id', moviesController.detail);
+
+router.get('/movie/:id', moviesController.movie);
 
 module.exports = router;
